@@ -4,6 +4,7 @@ services:
     container_name: wordpress
     volumes:
       - ./wp-content:/var/www/html/wp-content
+      - ./apache2.conf-wordpress:/etc/apache2/apache2.conf
     environment:
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_TABLE_PREFIX=wp_
@@ -35,6 +36,8 @@ services:
       - db
     image: phpmyadmin/phpmyadmin:latest
     container_name: phpmyadmin
+    volumes:
+      - ./apache2.conf-phpmyadmin:/etc/apache2/apache2.conf
     restart: always
     ports:
       - 8180:80
