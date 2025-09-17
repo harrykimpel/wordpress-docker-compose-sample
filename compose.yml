@@ -11,6 +11,9 @@ services:
       - WORDPRESS_DB_HOST=db
       - WORDPRESS_DB_USER=root
       - WORDPRESS_DB_PASSWORD=password
+      - NEW_RELIC_AGENT_VERSION="12.1.0.26"
+      - NEW_RELIC_LICENSE_KEY=xxxNRAL
+      - NEW_RELIC_APPNAME="WordPress Instruqt"
     depends_on:
       - db
       - phpmyadmin
