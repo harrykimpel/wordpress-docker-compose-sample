@@ -224,4 +224,7 @@ IncludeOptional conf-enabled/*.conf
 # Include the virtual host configurations:
 IncludeOptional sites-enabled/*.conf
 
+# Include the server-status.conf file
+Include conf-enabled/server-status.conf
+
 ServerName 127.0.0.1:8080

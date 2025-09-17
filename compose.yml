@@ -5,6 +5,7 @@ services:
     volumes:
       - ./wp-content:/var/www/html/wp-content
       - ./apache2.conf-wordpress:/etc/apache2/apache2.conf
+      - ./server-status.conf:/etc/apache2/conf-enabled/server-status.conf
     environment:
       - WORDPRESS_DB_NAME=wordpress
       - WORDPRESS_TABLE_PREFIX=wp_
