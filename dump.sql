@@ -340,7 +340,7 @@ INSERT INTO `wp_postmeta` VALUES
 (4,1,'_edit_lock','1753096433:1'),
 (5,8,'_edit_lock','1753096644:1'),
 (8,10,'_edit_lock','1753096705:1'),
-(11,12,'_edit_lock','1753263018:1');
+(11,12,'_edit_lock','1753263018:1'),
 (22, 15, '_edit_lock', '1758091463:1');
 /*!40000 ALTER TABLE `wp_postmeta` ENABLE KEYS */;
 UNLOCK TABLES;
