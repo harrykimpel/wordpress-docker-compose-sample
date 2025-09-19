@@ -14,7 +14,7 @@ provider "newrelic" {
 
 # Create Workload
 
-resource "newrelic_workload" "ms-demo-workload" {
+resource "newrelic_workload" "wordpress-workload" {
   name       = "WordPress Workload"
   account_id = var.NEW_RELIC_ACCOUNT_ID
   entity_search_query {
@@ -24,7 +24,16 @@ resource "newrelic_workload" "ms-demo-workload" {
   scope_account_ids = [var.NEW_RELIC_ACCOUNT_ID]
 }
 
-# Create Dashboard
+resource "newrelic_entity_tags" "wordpress-workload" {
+  guid = newrelic_workload.wordpress-workload.guid
+  tag {
+    key    = "terraform"
+    values = [true]
+  }
+}
+
+
+# Create WordPress Dashboard
 
 resource "newrelic_one_dashboard_json" "dashboard-wordpress" {
   json = file("${path.module}/dashboard-wordpress.json")
@@ -41,6 +50,8 @@ resource "newrelic_entity_tags" "dashboard-wordpress" {
 output "dashboard-wordpress" {
   value = newrelic_one_dashboard_json.dashboard-wordpress.permalink
 }
+
+# Create WordPress Dashboard Fullstack
 
 resource "newrelic_one_dashboard_json" "dashboard-wordpress-fullstack" {
   json = file("${path.module}/dashboard-wordpress-fullstack.json")
