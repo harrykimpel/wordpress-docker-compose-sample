@@ -1,0 +1,275 @@
+{
+    "name": "Wordpress",
+    "description": null,
+    "permissions": "PUBLIC_READ_WRITE",
+    "pages": [
+        {
+            "guid": "NjkyODgyN3xWSVp8REFTSEJPQVJEfDQwMzE2NjE3",
+            "name": "WordPress",
+            "description": null,
+            "widgets": [
+                {
+                    "id": "445951435",
+                    "title": "Unique Visitors",
+                    "layout": {
+                        "column": 1,
+                        "row": 1,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.billboard"
+                    },
+                    "rawConfiguration": {
+                        "dataFormatters": [],
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT uniqueCount(session) FROM PageView WHERE appName LIKE '%' SINCE 1 HOUR AGO"
+                            }
+                        ],
+                        "thresholds": []
+                    }
+                },
+                {
+                    "id": "445951436",
+                    "title": "Total Visitors Timeseries",
+                    "layout": {
+                        "column": 4,
+                        "row": 1,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.line"
+                    },
+                    "rawConfiguration": {
+                        "legend": {
+                            "enabled": true
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT count(session) FROM PageView WHERE appName LIKE '%' SINCE 1 hour ago TIMESERIES "
+                            }
+                        ],
+                        "yAxisLeft": {
+                            "zero": true
+                        }
+                    }
+                },
+                {
+                    "id": "445951437",
+                    "title": "Device Types Used",
+                    "layout": {
+                        "column": 7,
+                        "row": 1,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.billboard"
+                    },
+                    "rawConfiguration": {
+                        "dataFormatters": [],
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT percentage(count(*), WHERE deviceType = 'Desktop') AS 'Desktop', percentage(count(*), WHERE deviceType = 'Mobile') AS 'Mobile' FROM PageView WHERE appName LIKE '%' SINCE 1 hour ago"
+                            }
+                        ],
+                        "thresholds": []
+                    }
+                },
+                {
+                    "id": "445951438",
+                    "title": "Top 5 User OS's",
+                    "layout": {
+                        "column": 10,
+                        "row": 1,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.bar"
+                    },
+                    "rawConfiguration": {
+                        "facet": {
+                            "showOtherSeries": false
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT uniqueCount(session) FROM PageView WHERE appName LIKE '%' SINCE 1 hour ago FACET userAgentName, userAgentOS LIMIT 5"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "445951439",
+                    "title": "Web Transaction Time (ms)",
+                    "layout": {
+                        "column": 1,
+                        "row": 4,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.area"
+                    },
+                    "rawConfiguration": {
+                        "facet": {
+                            "showOtherSeries": false
+                        },
+                        "legend": {
+                            "enabled": true
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT average(apm.service.overview.web) * 1000 FROM Metric WHERE appName LIKE '%' FACET segmentName SINCE 1 hour ago TIMESERIES"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "445951440",
+                    "title": "Top 10 Transactions",
+                    "layout": {
+                        "column": 4,
+                        "row": 4,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.bar"
+                    },
+                    "rawConfiguration": {
+                        "facet": {
+                            "showOtherSeries": false
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT count(*) FROM Transaction WHERE appName LIKE '%' FACET request.uri LIMIT 10 SINCE 1 hour ago"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "445951441",
+                    "title": "Top 10 Fastest Transactions",
+                    "layout": {
+                        "column": 7,
+                        "row": 4,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.bar"
+                    },
+                    "rawConfiguration": {
+                        "facet": {
+                            "showOtherSeries": false
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT average(duration) FROM Transaction WHERE appName LIKE '%' FACET name SINCE 1 HOUR AGO LIMIT 10"
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "445951442",
+                    "title": "Transaction Duration Today Compared WIth 1 Week Ago (s)",
+                    "layout": {
+                        "column": 10,
+                        "row": 4,
+                        "width": 3,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.line"
+                    },
+                    "rawConfiguration": {
+                        "legend": {
+                            "enabled": true
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT average(duration) FROM Transaction WHERE appName LIKE '%' SINCE today COMPARE WITH 1 week ago TIMESERIES"
+                            }
+                        ],
+                        "yAxisLeft": {
+                            "zero": true
+                        }
+                    }
+                },
+                {
+                    "id": "445951443",
+                    "title": "Database Call Counts",
+                    "layout": {
+                        "column": 1,
+                        "row": 7,
+                        "width": 6,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.area"
+                    },
+                    "rawConfiguration": {
+                        "facet": {
+                            "showOtherSeries": false
+                        },
+                        "legend": {
+                            "enabled": true
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT count(databaseCallCount) FROM Transaction SINCE 1 hour ago WHERE appName LIKE '%' FACET name TIMESERIES "
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "445951444",
+                    "title": "Average Database Call Duration (s)",
+                    "layout": {
+                        "column": 7,
+                        "row": 7,
+                        "width": 6,
+                        "height": 3
+                    },
+                    "linkedEntityGuids": null,
+                    "visualization": {
+                        "id": "viz.area"
+                    },
+                    "rawConfiguration": {
+                        "legend": {
+                            "enabled": true
+                        },
+                        "nrqlQueries": [
+                            {
+                                "accountId": NEWRELIC_ACCOUNT_ID,
+                                "query": "SELECT average(databaseDuration) FROM Transaction WHERE appName LIKE '%' SINCE 1 HOUR AGO TIMESERIES"
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "variables": []
+}
